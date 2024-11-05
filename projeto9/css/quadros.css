@@ -1,0 +1,26 @@
+.quadro-pai {
+  border: 1px solid black;
+  width: 400px;
+  height: 400px;
+  position: relative;
+}
+.quadro-vermelho {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+}
+.quadro-verde {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  left: 50px;
+  top: 50px;
+  background-color: green;
+}
+.quadro-azul {
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  position: relative;
+  z-index: 2;
+}

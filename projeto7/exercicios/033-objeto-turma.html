@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let turma = {
+            alunos: [
+                {
+                    nome: 'John',
+                    notas: [1, 2, 3, 4]
+                },
+                {
+                    nome: 'Mary',
+                    notas: [2, 3, 4, 5]
+                }
+            ],
+            mediaTurma: function () {
+                let totalDeNotas = 0;
+                let somaDasNotas = 0;
+                for (let i = 0; i < this.alunos.length; i++) {
+                    for (let j = 0; j < this.alunos[i].notas.length; j++) {
+                        totalDeNotas++;
+                        somaDasNotas += this.alunos[i].notas[j];
+                    }
+                }
+                return somaDasNotas / totalDeNotas;
+            }
+        };
+        console.log(turma.mediaTurma());
+    </script>
+</body>
+
+</html>

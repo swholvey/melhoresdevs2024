@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <video
+      src="./video/video.mp4"
+      style="width: 300px"
+      poster="./img/video.jpg"
+      id="video1"
+    ></video>
+    <button onclick="iniciar()">Iniciar</button>
+    <button onclick="parar()">Parar</button>
+    <button onclick="pausar()">Pausar</button>
+    <button onclick="avancar()">Avançar</button>
+    <button onclick="retroceder()">Retroceder</button>
+    <button onclick="aumentarVelocidade()">+ Velocidade</button>
+    <button onclick="diminuirVelocidade()">- Velocidade</button>
+    <script>
+      let video1 = document.getElementById("video1");
+      function iniciar() {
+        video1.play();
+      }
+      function parar() {
+        video1.pause();
+        video1.currentTime = 0;
+      }
+      function pausar() {
+        video1.pause();
+      }
+      function avancar() {
+        video1.currentTime += 15;
+      }
+      function retroceder() {
+        video1.currentTime -= 15;
+      }
+      function aumentarVelocidade() {
+        video1.playbackRate += 0.5;
+      }
+      function diminuirVelocidade() {
+        video1.playbackRate -= 0.5;
+      }
+    </script>
+  </body>
+</html>

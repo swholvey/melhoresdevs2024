@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alterar Cor do Quadrado</title>
+    <style>
+        #parede {
+            border: 1px solid black;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="parede">
+        <img src="./img/cozinha.webp">
+    </div>
+    <button onclick="alterarCor('red')">Red</button>
+    <button onclick="alterarCor('green')">Green</button>
+    <button onclick="alterarCor('blue')">Blue</button>
+
+    <script>
+        function alterarCor(cor) {
+            document.getElementById('parede').style.backgroundColor = cor;
+        }
+    </script>
+</body>
+
+</html>

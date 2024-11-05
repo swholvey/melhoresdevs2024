@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="div1">Carregando...</div>
+    <button onclick="pararContador()">Parar contador</button>
+    <script>
+      let div1 = document.getElementById("div1");
+      let numero = 0;
+      let intervalo;
+      function atualizaTexto() {
+        div1.textContent = numero;
+        numero++;
+      }
+      intervalo = window.setInterval(atualizaTexto, 1000);
+      function pararContador() {
+        window.clearInterval(intervalo);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Juros Simples</title>
+</head>
+
+<body>
+    <input type="text" id="capital" placeholder="Capital (R$)">
+    <input type="text" id="taxa" placeholder="Taxa (%)">
+    <input type="text" id="tempo" placeholder="Tempo (meses)">
+    <button onclick="calcularJuros()">Calcular Juros</button>
+    <p id="resultadoJuros"></p>
+    <script>
+        function calcularJuros() {
+            let capital = parseFloat(document.getElementById('capital').value);
+            let taxa = parseFloat(document.getElementById('taxa').value) / 100;
+            let tempo = parseFloat(document.getElementById('tempo').value);
+            let juros = capital * taxa * tempo;
+            document.getElementById('resultadoJuros').innerText = `O juros simples é R$ ${ juros.toFixed(2) }`;
+        }
+    </script>
+</body>
+
+</html>

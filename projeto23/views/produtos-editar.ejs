@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <%- include('partials/menu') -%>
+    <main>
+      Produtos / Editar
+      <form action="">
+        <input type="hidden" name="id" value="<%= produto.id %>" />
+        <label class="form-label mt-2" for="nome">Nome</label>
+        <input class="form-control" type="text" name="nome" value="<%= produto.nome %>" />
+        <label class="form-label mt-2" for="valor"> Valor </label>
+        <input class="form-control" type="text" name="valor" value="<%= produto.valor %>" />
+        <label class="form-label mt-2" for="visivel"> Visível </label>
+        <select class="form-control" name="visivel">
+          <option value="1">Sim</option>
+          <option value="0">Não</option>
+        </select>
+        <button type="submit" class="mt-2 btn-primary">Salvar</button>
+      </form>
+    </main>
+  </body>
+</html>

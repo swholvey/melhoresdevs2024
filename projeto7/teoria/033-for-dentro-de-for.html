@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let colunas = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+        let linhas = [1, 2, 3, 4, 5, 6, 7, 8];
+        for (let i = 0; i < colunas.length; i++) {
+            let linha = '';
+            for (let j = 0; j < linhas.length; j++) {
+                linha += `${colunas[i]}${linhas[j]}`;
+                if ((j + 1) < linhas.length) {
+                    linha += `,`;
+                }
+            }
+            console.log(linha);
+        }
+    </script>
+</body>
+
+</html>

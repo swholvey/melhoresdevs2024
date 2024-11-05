@@ -1,0 +1,13 @@
+ul {
+  list-style-image: url("../img/engrenagem.png");
+  margin: 0;
+  padding: 0;
+  padding-left: 50px;
+  font-size: 50px;
+  list-style-position: outside;
+}
+
+li {
+  border: 1px solid red;
+  /* padding: 15px 0; */
+}

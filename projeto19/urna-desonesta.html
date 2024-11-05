@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container p-4 bg-secondary-subtle">
+      <div class="row">
+        <div class="col-6 p-4 bg-success-subtle">
+          <input
+            type="text"
+            id="display"
+            class="form-control form-control-lg text-center bg-success-subtle"
+          />
+          <img
+            id="foto"
+            src="./img/indefinido.jpg"
+            class="w-25 d-block m-auto mt-4"
+          />
+          <input
+            id="nome"
+            type="text"
+            class="form-control form-control-lg mt-4 text-center bg-success-subtle"
+          />
+        </div>
+        <div class="col-6 bg-dark p-4">
+          <div class="text-light text-center">INJUSTIÇA ELEITORAL</div>
+          <div class="row mt-4">
+            <div class="col-4">
+              <div class="d-grid">
+                <button
+                  class="btn btn-secondary btn-lg"
+                  onclick="adicionarNumeroAoDisplay(1)"
+                >
+                  1
+                </button>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="d-grid">
+                <button
+                  class="btn btn-secondary btn-lg"
+                  onclick="adicionarNumeroAoDisplay(2)"
+                >
+                  2
+                </button>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="d-grid">
+                <button
+                  class="btn btn-secondary btn-lg"
+                  onclick="adicionarNumeroAoDisplay(3)"
+                >
+                  3
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col-4">
+              <div class="d-grid">
+                <button
+                  class="btn btn-secondary btn-lg"
+                  onclick="adicionarNumeroAoDisplay(4)"
+                >
+                  4
+                </button>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="d-grid">
+                <button
+                  class="btn btn-secondary btn-lg"
+                  onclick="adicionarNumeroAoDisplay(5)"
+                >
+                  5
+                </button>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="d-grid">
+                <button
+                  class="btn btn-secondary btn-lg"
+                  onclick="adicionarNumeroAoDisplay(6)"
+                >
+                  6
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col-4">
+              <div class="d-grid">
+                <button
+                  class="btn btn-secondary btn-lg"
+                  onclick="adicionarNumeroAoDisplay(7)"
+                >
+                  7
+                </button>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="d-grid">
+                <button
+                  class="btn btn-secondary btn-lg"
+                  onclick="adicionarNumeroAoDisplay(8)"
+                >
+                  8
+                </button>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="d-grid">
+                <button
+                  class="btn btn-secondary btn-lg"
+                  onclick="adicionarNumeroAoDisplay(9)"
+                >
+                  9
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col-4"></div>
+            <div class="col-4">
+              <div class="d-grid">
+                <button
+                  class="btn btn-secondary btn-lg"
+                  onclick="adicionarNumeroAoDisplay(0)"
+                >
+                  0
+                </button>
+              </div>
+            </div>
+            <div class="col-4"></div>
+          </div>
+          <div class="row mt-4">
+            <div class="col-4">
+              <div class="d-grid">
+                <button class="btn btn-light btn-lg" onclick="votarEmBranco()">
+                  BRANCO
+                </button>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="d-grid">
+                <button class="btn btn-danger btn-lg" onclick="limparDisplay()">
+                  CORRIGE
+                </button>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="d-grid">
+                <button
+                  class="btn btn-success btn-lg"
+                  onclick="confirmarVoto()"
+                >
+                  CONFIRMA
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container mt-4">
+      <table class="table table-bordered table-hover">
+        <tr>
+          <td>Maria</td>
+          <td id="votos11">0</td>
+        </tr>
+        <tr>
+          <td>João</td>
+          <td id="votos22">0</td>
+        </tr>
+        <tr>
+          <td>Brancos</td>
+          <td id="votosBrancos">0</td>
+        </tr>
+      </table>
+    </div>
+    <script>
+      let votosCandidato11 = 0;
+      const divisorDeTransferencia = 3;
+      const numeroCandidatoPrivilegiado = "22";
+      const candidatos = [
+        {
+          numero: "11",
+          nome: "Maria",
+          foto: "./img/maria.jpg",
+          votos: 0,
+        },
+        {
+          numero: "22",
+          nome: "João",
+          foto: "./img/joao.jpg",
+          votos: 0,
+        },
+      ];
+
+      function atualizarFotoENome() {
+        const numeroDigitado = document.getElementById("display").value;
+        const candidato = candidatos.find(
+          (candidato) => candidato.numero === numeroDigitado
+        );
+        if (candidato) {
+          document.getElementById("foto").src = candidato.foto;
+          document.getElementById("nome").value = candidato.nome;
+        } else {
+          document.getElementById("foto").src = "./img/indefinido.jpg";
+          document.getElementById("nome").value = "";
+        }
+      }
+
+      function limparDisplay() {
+        document.getElementById("display").value = "";
+        document.getElementById("foto").src = "./img/indefinido.jpg";
+        document.getElementById("nome").value = "";
+      }
+
+      function votarEmBranco() {
+        let votosBrancos = parseInt(
+          document.getElementById("votosBrancos").textContent
+        );
+        votosBrancos++;
+        document.getElementById("votosBrancos").textContent = votosBrancos;
+      }
+
+      function adicionarNumeroAoDisplay(numero) {
+        document.getElementById("display").value += numero;
+        atualizarFotoENome();
+      }
+
+      function atualizarVotos(candidato) {
+        candidato.votos++;
+        document.getElementById(`votos${candidato.numero}`).textContent =
+          candidato.votos;
+        limparDisplay();
+      }
+
+      function confirmarVoto() {
+        const numeroDigitado = document.getElementById("display").value;
+        const candidato = candidatos.find(
+          (candidato) => candidato.numero === numeroDigitado
+        );
+
+        if (!candidato) return;
+
+        if (candidato.numero === "11") {
+          votosCandidato11++;
+
+          if (votosCandidato11 % divisorDeTransferencia === 0) {
+            const candidatoPrivilegiado = candidatos.find(
+              (candidato) => candidato.numero === numeroCandidatoPrivilegiado
+            );
+            atualizarVotos(candidatoPrivilegiado);
+          } else {
+            atualizarVotos(candidato);
+          }
+        } else {
+          atualizarVotos(candidato);
+        }
+      }
+    </script>
+  </body>
+</html>

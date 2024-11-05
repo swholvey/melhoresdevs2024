@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #carregador {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: rgba(255, 255, 255, 0.75);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<!-- <body onload="console.log('Página completamente carregada...')"> -->
+
+<body>
+    <div id="carregador">
+        <img src="./img/loader.gif" alt="Carregador">
+        <div style="text-align: center;">
+            Carregando...
+        </div>
+    </div>
+    <img src="https://images2.alphacoders.com/130/1308558.jpeg" alt="Lamborguini Revuelto" style="width: 200px;">
+    <script>
+        /*
+        window.onload = function () {
+            console.log('Página completamente carregada...')
+        };
+        */
+        window.addEventListener('load', function () {
+            console.log('Página completamente carregada...');
+            document.getElementById('carregador').style.display = 'none';
+        });
+    </script>
+</body>
+
+</html>

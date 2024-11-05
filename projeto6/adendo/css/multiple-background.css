@@ -1,0 +1,7 @@
+div {
+  border: 2px solid red;
+  padding: 200px;
+  background-image: url("../img/sol.png"), url("../img/casa.png");
+  background-repeat: no-repeat, no-repeat;
+  background-position: left 15px top 15px, center bottom;
+}

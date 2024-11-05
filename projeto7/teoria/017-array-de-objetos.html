@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="module">
+        /*
+        // Objeto literal
+        let aluno = {
+            nome: 'John',
+            idade: 17,
+            notas: [1, 2, 3, 4]
+        }
+        */
+        /*
+         function calcularMedia() {
+             return (this.notas[0] + this.notas[1] + this.notas[2] + this.notas[3]) / 4;
+         }
+         let turma = [
+             {
+                 nome: 'John',
+                 notas: [1, 2, 3, 4],
+                 media: calcularMedia
+             },
+             {
+                 nome: 'Mary',
+                 notas: [2, 3, 4, 5],
+                 media: calcularMedia
+             }
+         ];
+         console.log(turma[0].media());
+         console.log(turma[1].media());
+         */
+        /*
+        function calcularMedia() {
+            return (this.notas[0] + this.notas[1] + this.notas[2] + this.notas[3]) / 4;
+        }
+        function criarAluno(pNome, pNotas) {
+            return {
+                nome: pNome,
+                notas: pNotas,
+                media: calcularMedia
+            }
+        }
+        */
+        /*
+        let turma = [
+            criarAluno('John', [1, 2, 3, 4]),
+            criarAluno('Mary', [2, 3, 4, 5])
+        ];
+        */
+        //let turma = [];
+        //turma.push(criarAluno('John', [1, 2, 3, 4]));
+        //turma[0] = criarAluno('John', [1, 2, 3, 4]);
+        //console.log(turma[0].nome);
+        //console.log(turma[0].media());
+        //turma.push(criarAluno('Mary', [2, 3, 4, 5]));
+        //turma[1] = criarAluno('Mary', [2, 3, 4, 5])
+        //console.log(turma[1].nome);
+        //console.log(turma[1].media());
+        /*
+        for (let i = 0; i < turma.length; i++) {
+            console.log(turma[i].media());
+            console.log(turma[i].nome);
+        }
+        */
+        /*
+         for (let i in turma) {
+             console.log(turma[i].nome);
+             console.log(turma[i].media());
+         }
+         */
+        /*
+        for (let aluno of turma) {
+            console.log(aluno.nome);
+            console.log(aluno.media());
+        }
+        */
+        /*
+         turma.forEach(function (aluno) {
+             console.log(aluno.nome);
+             console.log(aluno.media());
+         });
+         */
+        /*
+        function Aluno(pNome, pNotas) {
+            this.nome = pNome;
+            this.notas = pNotas;
+            this.media = function () {
+                return (this.notas[0] + this.notas[1] + this.notas[2] + this.notas[3]) / 4
+            }
+        }
+        let aluno1 = new Aluno('John', [1, 2, 3, 4]);
+        console.log(aluno1.nome);
+        let aluno2 = new Aluno('Mary', [2, 3, 4, 5]);
+        console.log(aluno2.nome);
+        console.log(aluno2.media());
+        */
+        import Aluno from './modules/aluno.js';
+        let aluno1 = new Aluno('John', [1, 2, 3, 4]);
+        console.log(aluno1.nome);
+        console.log(aluno1.media());
+        let aluno2 = new Aluno('Mary', [2, 3, 4, 5]);
+        console.log(aluno2.nome);
+        console.log(aluno2.media());
+    </script>
+</body>
+
+</html>

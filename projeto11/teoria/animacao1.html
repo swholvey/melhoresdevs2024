@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="quadro1" style="width: 100px;height: 100px;
+    background-color: red;position: relative;top: 0;left: 0;"></div>
+    <script>
+      let quadro1 = document.getElementById("quadro1");
+      let xInicial = 0;
+      let yInicial = 0;
+      function animaQuadro(x, y) {
+        quadro1.style.top = y + "px";
+        quadro1.style.left = x + "px";
+      }
+      setInterval(function () {
+        animaQuadro(xInicial++, yInicial++);
+      }, 24);
+    </script>
+  </body>
+</html>

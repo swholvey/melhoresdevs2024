@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!--
+    <h2>Texto 1</h2>
+    <h2>Texto 2</h2>
+    <p class="p1">Texto 3</p>
+    <p class="p1">Texto 4</p>
+    <p id="p2">Texto 5</p>
+    <ul>
+        <li>
+            Item 1
+        </li>
+        <li>
+            Item 2
+        </li>
+        <li>
+            Item 3
+        </li>
+        <li>
+            Item 4
+        </li>
+    </ul>
+    -->
+
+    <ul id="lista">
+        <li>Item 1</li>
+        <li>Item 2</li>
+    </ul>
+    <!--
+    <button id="adicionar" onclick="adicionaItem()">
+        Adicionar Item
+    </button>
+    -->
+    <button id="adicionar">
+        Adicionar Item
+    </button>
+
+    <script>
+        /*
+        console.time('temporizador');
+        for (let i = 1; i < 1000; i++) {
+            console.log(i);
+        }
+        console.timeEnd('temporizador');
+        */
+        //console.log('Opa');
+        //alert('Opa');
+        //prompt('Digite sua idade');
+        //document.getElementById('elemento1');
+        //console.log(document);
+        //console.log(document.head);
+        //console.log(document.body);
+        //console.log(document.head);
+        //console.log(document.head);
+        //let colecao = document.head.getElementsByTagName('title');
+        //console.log(colecao[0]);
+        /*
+        let h2s = document.getElementsByTagName('h2');
+        //console.log(h2s);
+        for (let i = 0; i < h2s.length; i++) {
+            console.log(h2s[i]);
+        }
+        */
+        /*
+         let p1s = document.getElementsByClassName('p1');
+         //console.log(p1s);
+         for (let i = 0; i < p1s.length; i++) {
+             console.log(p1s[i]);
+         }
+         */
+        /*
+        let p2 = document.getElementById('p2');
+        console.log(p2);
+        */
+        /*
+         let li = document.querySelector('li');
+         console.log(li);
+         */
+        //let lis = document.querySelectorAll('li');
+        /*
+        let lis = document.querySelectorAll('ul li:nth-child(even)');
+        //console.log(lis);
+        for (let i = 0; i < lis.length; i++) {
+            console.log(lis[i]);
+        }
+        lis.forEach(function (li) {
+            console.log(li);
+        });
+        */
+        /*
+         let p1s = document.querySelectorAll('.p1');
+         //console.log(p1s);
+         p1s.forEach(function (p1) {
+             console.log(p1);
+         });
+         */
+        /*
+        let lis1 = document.getElementsByTagName('li');
+        let lis2 = document.querySelectorAll('li');
+        //console.log(lis1);
+        //console.log(lis2);
+        function adicionaItem() {
+            document.getElementById('lista').innerHTML += '<li>Novo item</li>';
+            console.log(lis1);
+            console.log(lis2);
+        }
+        */
+        /*
+         let lis = document.getElementById('lista').innerHTML;
+         for (let i = 0; i < lis.length; i++) {
+             console.log(lis[i]);
+         }
+         */
+        /*
+        let lis1 = document.getElementsByTagName('li');
+        let lis2 = document.querySelectorAll('li');
+        function adicionaItem() {
+            let novoItem = document.createElement('li');
+            novoItem.textContent = 'Novo item';
+            novoItem.style.color = 'red';
+            document.getElementById('lista').appendChild(novoItem);
+            console.log(lis1);
+            console.log(lis2);
+        }
+        */
+        document.getElementById('adicionar').addEventListener('click', function () {
+            let novoItem = document.createElement('li');
+            //novoItem.textContent = 'Novo item';
+            novoItem.innerText = 'Novo item';
+            document.getElementById('lista').appendChild(novoItem);
+        });
+    </script>
+</body>
+
+</html>

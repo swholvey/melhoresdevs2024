@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <ul id="lista1" quantidade="20"></ul>
+    <script>
+      let lista1 = document.getElementById("lista1");
+      let quantidade = lista1.getAttribute("quantidade");
+      for (let i = 1; i <= quantidade; i++) {
+        lista1.innerHTML += `<li>Item ${i}</li>`;
+      }
+    </script> -->
+    <ul id="lista1" data-quantidade="20"></ul>
+    <script>
+      let lista1 = document.getElementById("lista1");
+      let quantidade = lista1.dataset.quantidade;
+      for (let i = 1; i <= quantidade; i++) {
+        lista1.innerHTML += `<li>Item ${i}</li>`;
+      }
+    </script>
+  </body>
+</html>

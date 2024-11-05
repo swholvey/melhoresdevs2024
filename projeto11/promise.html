@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let entrega = true;
+      let pedirPizza = new Promise((resolve, reject) => {
+        console.log("Você pediu uma pizza.");
+        setTimeout(() => {
+          if (entrega) {
+            resolve("Pizza entregue! Bom apetite!");
+          } else {
+            reject("Desculpe, houve um problema com o seu pedido.");
+          }
+        }, 2000);
+      });
+      pedirPizza
+        .then((mensagem) => {
+          console.log(mensagem);
+        })
+        .catch((erro) => {
+          console.log(erro);
+        });
+    </script>
+  </body>
+</html>

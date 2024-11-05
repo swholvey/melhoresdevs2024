@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./js/jquery-3.7.1.min.js"></script>
+  </head>
+  <body>
+    <!-- Seleção de elemento por id
+    <div id="div1"></div>
+    <script>
+      //let div1 = document.getElementById("div1");
+      let div1 = $("#div1");
+      console.log(div1);
+    </script>
+    -->
+    <!-- Seleção de elemento por classe
+    <div class="classe1">Texto 1...</div>
+    <div class="classe1">Texto 2...</div>
+    <script>
+      //let classe1 = document.querySelectorAll(".classe1");
+      //let classe1 = document.getElementsByClassName(".classe1");
+      let classe1 = $(".classe1");
+      console.log(classe1);
+    </script>
+    -->
+    <!-- Seleção por tag html
+    <h1>Texto 1...</h1>
+    <script>
+      //let h1 = document.getElementsByTagName("h1")[0];
+      let h1 = $("h1");
+      console.log(h1);
+    </script> -->
+    <!-- Seleção de elementos aninhados
+    <ul>
+      <li>Item 1</li>
+      <li>Item 2</li>
+    </ul>
+    <script>
+      //let lis = document.querySelectorAll('ul li');
+      let lis = $("ul li");
+      console.log(lis);
+    </script> -->
+    <!-- Mudando texto do elemento html
+    <div id="div1">Texto 1...</div>
+    <script>
+      //document.getElementById("div1").textContent = "Texto 2...";
+      $('#div1').text('Texto 3...');
+    </script> -->
+    <!-- Mudar conteúdo html
+    <div id="div1">
+        <p>
+            Texto 1...
+        </p>
+    </div>
+    <script>
+        //document.getElementById('div1').innerHTML = 
+        //'<strong>Texto 2...</strong>';
+        $('#div1').html('<strong>Texto 3...</strong>');
+    </script> -->
+    <!-- Pegando valor de um campo
+    <input type="text" id="nome" value="John Doe 123" />
+    <script>
+      //let nome = document.getElementById('nome').value;
+      let nome = $("#nome").val();
+      console.log(nome);
+    </script> -->
+    <!-- Pegar atributo de um elemento html
+    <img src="./img/imagem123.jpg" alt="Imagem 123" id="imagem1" />
+    <script>
+      //let enderecoDaImagem = document.getElementById('imagem1').src;
+      let enderecoDaImagem = $("#imagem1").attr("src");
+      console.log(enderecoDaImagem);
+    </script> -->
+    <!-- Adicionando classe
+    <div id="div1">Texto 1...</div>
+    <script>
+      //document.getElementById("div1").classList.add("classe2");
+      $("#div1").addClass("classe2");
+    </script> -->
+    <!-- Removendo uma classe
+    <div id="div1" class="classe2">Texto 1...</div>
+    <script>
+      //document.getElementById("div1").classList.remove('classe2');
+      $("#div1").removeClass("classe2");
+    </script> -->
+    <!-- Mudar propriedade css
+    <div id="div1">Texto 1...</div>
+    <script>
+      //document.getElementById('div1').style.color = 'red';
+      $("#div1").css("color", "red");
+    </script> -->
+    <!-- Evento click
+    <button id="botao1">Clique me</button>
+    <script>
+      /*
+      document.getElementById("botao1").addEventListener("click", function () {
+        alert("Clicou!");
+      });
+      */
+      $("#botao1").click(function () {
+        alert("Clicou!");
+      });
+    </script> -->
+    <!-- Pegando o evento change
+    <select id="idade">
+      <option value="17">17 anos</option>
+      <option value="18">18 anos</option>
+    </select>
+    <script>
+      /*
+      document.getElementById("idade").addEventListener("change", function () {
+        console.log(this.value);
+      });
+      */
+      $("#idade").change(function () {
+        console.log($(this).val());
+      });
+    </script> -->
+    <!-- Evento de carregamento
+    <div id="div1">Carregando...</div>
+    <script>
+      /*
+      window.onload = function () {
+        document.getElementById('div1').textContent = 'Carregado!';
+      };
+      */
+      $(document).ready(function () {
+        $("#div1").text("Carregado!");
+      });
+    </script> -->
+    <!-- <div id="div1">Texto 1</div>
+    <button id="botao1">Clique aqui para esconder</button>
+    <button id="botao2">Clique aqui para mostrar</button>
+    <button id="botao3">Clique aqui para esconder e mostrar</button>
+    <script>
+      $("#botao1").click(function () {
+        $("#div1").hide();
+      });
+      $("#botao2").click(function () {
+        $("#div1").show();
+      });
+      $("#botao3").click(function () {
+        $("#div1").toggle();
+      });
+    </script> -->
+    <!-- <div id="div1">Lorem ipsum dolor sit</div>
+    <button id="botao1">Desaparecer</button>
+    <button id="botao2">Aparecer</button>
+    <script>
+      $("#botao1").click(function () {
+        $("#div1").fadeOut("slow");
+      });
+      $("#botao2").click(function () {
+        $("#div1").fadeIn("slow");
+      });
+    </script> -->
+    <!-- <ul>
+      <li>Item A</li>
+      <li>Item B</li>
+      <li>Item C</li>
+      <li>Item D</li>
+    </ul>
+    <script>
+      $("li").each(function (index) {
+        $(this).text("Item " + index);
+      });
+    </script> -->
+    <!-- <img id="img1" src="" alt="" style="width: 100px; height: 100px;" />
+    <script>
+      $.get("https://dog.ceo/api/breeds/image/random", function (data) {
+        console.log(data);
+        $("#img1").attr("src", data.message);
+      });
+    </script> -->
+    <!-- <script>
+      $.post(
+        "https://httpbin.org/post",
+        {
+          email: "johndoe@gmail.com",
+          telefone: '17988887777'
+        },
+        function (data) {
+          console.log(data);
+        }
+      );
+    </script> -->
+    <div
+      id="div1"
+      style="
+        width: 100px;
+        height: 100px;
+        background-color: green;
+        position: relative;
+      "
+    ></div>
+    <div
+      id="div2"
+      style="
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        position: relative;
+      "
+    ></div>
+    <script>
+      $("#div1")
+        .animate(
+          {
+            left: "100px",
+          },
+          3000
+        )
+        .animate(
+          {
+            left: "0px",
+          },
+          3000
+        );
+      $("#div2").css("background-color", "blue").slideUp(3000).slideDown(3000);
+    </script>
+  </body>
+</html>

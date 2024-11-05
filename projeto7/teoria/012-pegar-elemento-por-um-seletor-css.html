@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid silver;
+        }
+
+        th,
+        td {
+            border: 1px solid silver;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th>
+                Nome
+            </th>
+            <th>
+                Preço
+            </th>
+        </tr>
+        <tr>
+            <td>
+                PlayStation
+            </td>
+            <td>
+                R$ 4.000
+            </td>
+        </tr>
+        <tr>
+            <td>
+                X-Box
+            </td>
+            <td>
+                R$ 3.500
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Notebook Acer XPTO
+            </td>
+            <td>
+                R$ 6.000
+            </td>
+        </tr>
+        <tr>
+            <td>
+                iPhone
+            </td>
+            <td>
+                R$ 15.000
+            </td>
+        </tr>
+    </table>
+    <script>
+        let linhas = document.querySelectorAll('table tr:nth-child(even)');
+        for (let linha of linhas) {
+            linha.style.backgroundColor = 'silver';
+        }
+    </script>
+</body>
+
+</html>

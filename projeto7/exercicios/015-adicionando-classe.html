@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alternar Cor</title>
+    <style>
+        .verde {
+            background-color: green;
+            color: white;
+        }
+
+        .vermelho {
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="botao" onclick="alternarCor()">Clique para Alternar Cor</button>
+
+    <script>
+        function alternarCor() {
+            var botao = document.getElementById('botao');
+            if (botao.classList.contains('verde')) {
+                botao.classList.remove('verde');
+                botao.classList.add('vermelho');
+            } else {
+                botao.classList.remove('vermelho');
+                botao.classList.add('verde');
+            }
+        }
+    </script>
+</body>
+
+</html>

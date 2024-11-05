@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let produto = {
+            nome: 'PlayStation',
+            preco: 5000,
+            precoComDesconto: function (desconto) {
+                return this.preco - (this.preco * (desconto / 100));
+            }
+        }
+        console.log(produto.precoComDesconto(10));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Produtos</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body class="pagina-produtos">
+    <%- include('partials/menu') -%>
+    <main class="p-3">
+      <div
+        class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-2"
+      >
+        <span>Produtos / Novo</span>
+      </div>
+
+      <form action="/produtos/salvar" method="post">
+        <label class="form-label" for="nome"> Nome </label>
+        <input class="form-control" type="text" name="nome" value="" required />
+
+        <label class="form-label mt-2" for="valor"> Valor </label>
+        <input
+          class="form-control"
+          type="text"
+          name="valor"
+          value=""
+          required
+        />
+
+        <label class="form-label mt-2" for="visivel"> Visível </label>
+        <select class="form-control" name="visivel">
+          <option value="1">Sim</option>
+          <option value="0">>Não</option>
+        </select>
+
+        <button type="submit" class="btn btn-primary mt-2">Salvar</button>
+      </form>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function pedirPao() {
+        return new Promise((resolve) => {
+          console.log("Você pediu pão...");
+          setTimeout(() => {
+            resolve("Pão está pronto!");
+          }, 2000);
+        });
+      }
+      function pegarCafe() {
+        return new Promise((resolve) => {
+          console.log("Você pegou um café!");
+          setTimeout(() => {
+            resolve("Café na mão!");
+          }, 1000);
+        });
+      }
+      async function fazerPedido() {
+        console.log("Pedido iniciado...");
+        let cafe = await pegarCafe();
+        console.log(cafe);
+        let pao = await pedirPao();
+        console.log(pao);
+        console.log("Pedido completo!");
+      }
+      fazerPedido();
+    </script>
+  </body>
+</html>

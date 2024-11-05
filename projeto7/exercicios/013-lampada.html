@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luz</title>
+</head>
+
+<body>
+    <button onclick="acender()">
+        Acender
+    </button>
+    <img id="lampada" src="./img/luz-apagada.gif">
+    <button onclick="apagar()">
+        Apagar
+    </button>
+    <script>
+        function acender() {
+            lampada = document.getElementById('lampada').src = './img/luz-acesa.gif';
+        }
+        function apagar() {
+            lampada = document.getElementById('lampada').src = './img/luz-apagada.gif';
+        }
+    </script>
+</body>
+
+</html>

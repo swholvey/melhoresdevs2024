@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Desconto</title>
+</head>
+
+<body>
+    <input type="text" id="preco" placeholder="Preço Original (R$)">
+    <input type="text" id="desconto" placeholder="Desconto (%)">
+    <button onclick="calcularDesconto()">Calcular Desconto</button>
+    <p id="resultadoDesconto"></p>
+    <script>
+        function calcularDesconto() {
+            let preco = parseFloat(document.getElementById('preco').value);
+            let desconto = parseFloat(document.getElementById('desconto').value) / 100;
+            let precoFinal = preco - (preco * desconto);
+            document.getElementById('resultadoDesconto').innerText = `O preço com desconto é R$ ${ precoFinal.toFixed(2) }`;
+        }
+    </script>
+</body>
+
+</html>

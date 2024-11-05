@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .cartao {
+            width: 400px;
+            aspect-ratio: 2/1.125;
+            border-radius: 25px;
+            border: 1px solid red;
+            padding-top: 100px;
+            box-sizing: border-box;
+        }
+
+        .cartao div {
+            border: 1px solid green;
+        }
+    </style>
+</head>
+
+<body>
+    <label for="">
+        Número do cartão
+    </label>
+    <!-- <input type="text" oninput="numeroCartao(this)"> -->
+    <input type="text" oninput="preencheCartao(this,'numero')">
+    <label for="">
+        Validade
+    </label>
+    <!-- <input type="text" oninput="validadeCartao(this)"> -->
+    <input type="text" oninput="preencheCartao(this,'validade')">
+    <label for="">
+        Código de segurança
+    </label>
+    <!-- <input type="text" oninput="codigoCartao(this)"> -->
+    <input type="text" oninput="preencheCartao(this,'codigo')">
+    <div class="cartao">
+        <div id="cartao-numero">numero</div>
+        <div id="cartao-validade">validade</div>
+        <div id="cartao-codigo">codigo</div>
+    </div>
+    <script>
+        // function numeroCartao(elemento) {
+        //     document.getElementById('cartao-numero').textContent = elemento.value;
+        // }
+        // function validadeCartao(elemento) {
+        //     document.getElementById('cartao-validade').textContent = elemento.value;
+        // }
+        // function codigoCartao(elemento) {
+        //     document.getElementById('cartao-codigo').textContent = elemento.value;
+        // }
+        function preencheCartao(elemento, campo) {
+            document.getElementById(`cartao-${campo}`).textContent = elemento.value;
+        }
+    </script>
+</body>
+
+</html>

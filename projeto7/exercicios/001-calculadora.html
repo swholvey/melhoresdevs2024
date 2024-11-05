@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+</head>
+
+<body>
+    <input type="text" id="numero1" placeholder="Informe o número 1">
+    <input type="text" id="numero2" placeholder="Informe o número 2">
+    <select id="operacao">
+        <option value="+">
+            +
+        </option>
+        <option value="-">
+            -
+        </option>
+        <option value="*">
+            *
+        </option>
+        <option value="/">
+            /
+        </option>
+    </select>
+    <button onclick="calcular()">
+        Executar calculo
+    </button>
+    <p id="resultado">
+    </p>
+    <script>
+        function calcular() {
+            let numero1 = parseFloat(document.getElementById('numero1').value);
+            let numero2 = parseFloat(document.getElementById('numero2').value);
+            let operacao = document.getElementById('operacao').value;
+            let calculo;
+            if (operacao === '+') {
+                calculo = numero1 + numero2;
+            } else if (operacao === '-') {
+                calculo = numero1 - numero2;
+            } else if (operacao === '*') {
+                calculo = numero1 * numero2;
+            } else {
+                calculo = numero1 / numero2;
+            }
+            document.getElementById('resultado').innerText = calculo;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo da Velocidade Média</title>
+</head>
+
+<body>
+    <input type="text" id="distancia" placeholder="Distância (km)">
+    <input type="text" id="tempo" placeholder="Tempo (h)">
+    <button onclick="calcularVelocidade()">Calcular Velocidade Média</button>
+    <p id="resultadoVelocidade"></p>
+    <script>
+        function calcularVelocidade() {
+            let distancia = parseFloat(document.getElementById('distancia').value);
+            let tempo = parseFloat(document.getElementById('tempo').value);
+            let velocidade = distancia / tempo;
+            document.getElementById('resultadoVelocidade').innerText = `A velocidade média é: ${ velocidade.toFixed(2) } km / h`;
+        }
+    </script>
+</body>
+
+</html>

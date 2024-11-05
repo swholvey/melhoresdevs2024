@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let apostas = [
+            [13, 37, 34, 38, 24, 7],
+            [28, 20, 23, 22, 31, 12],
+            [22, 11, 30, 13, 29, 44],
+            [25, 24, 60, 47, 48, 1],
+            [17, 20, 4, 36, 16, 38],
+            [14, 28, 53, 45, 6, 9],
+            [42, 50, 53, 6, 13, 35],
+            [25, 33, 6, 12, 58, 48],
+            [3, 53, 10, 27, 16, 59],
+            [42, 22, 41, 2, 37, 12]
+
+        ];
+        let numeros = [];
+        while (numeros.length < 6) {
+            let numeroTemporario = Math.round(Math.random() * 60);
+            if (numeros.includes(numeroTemporario)) {
+                continue;
+            }
+            let contadorIguais = aspostas.map(
+                aposta => aposta.filter(
+                    numero => numeros.includes(numero)
+                        ||
+                        numero == numeroTemporario
+                ).length
+            );
+            let validaNumero = contadorIguais.every(
+                contador => contador <= 3
+            );
+            if (validaNumero) {
+                numeros.push(numeroTemporario);
+            }
+        }
+        console.log(numeros);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversão de Moeda</title>
+</head>
+
+<body>
+    <input type="text" id="dolar" placeholder="Valor em dólar">
+    <input type="text" id="taxaCambio" placeholder="Taxa de Câmbio">
+    <button onclick="converterMoeda()">Converter para Dólar</button>
+    <p id="resultadoMoeda"></p>
+    <script>
+        function converterMoeda() {
+            let dolar = parseFloat(document.getElementById('dolar').value);
+            let taxaCambio = parseFloat(document.getElementById('taxaCambio').value);
+            let real = dolar * taxaCambio;
+            document.getElementById('resultadoMoeda').innerText = `US$ ${ dolar } é igual a R$ ${ real.toFixed(2) }`;
+        }
+    </script>
+</body>
+
+</html>

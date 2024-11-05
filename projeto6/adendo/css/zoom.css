@@ -1,0 +1,9 @@
+body {
+  zoom: 0.5;
+}
+
+div {
+  border: 2px solid red;
+  width: 100px;
+  height: 100px;
+}

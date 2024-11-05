@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>Upload de Imagem</h2>
+    <form id="formulario">
+      <input type="file" id="arquivo" accept="image/*" required />
+      <button type="submit">Upload</button>
+    </form>
+    <h2>Imagens no Firebase</h2>
+    <table id="imageTable" border="1">
+      <thead>
+        <tr>
+          <th>Imagem</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody id="corpoDaTabela"></tbody>
+    </table>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+      import {
+        getStorage,
+        ref,
+        uploadBytes,
+        getDownloadURL,
+        listAll,
+        deleteObject,
+      } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-storage.js";
+      const firebaseConfig = {
+        apiKey: "AIzaSyD3DJ2tmoTSI9jqk3w_sxEkd8PyIr0ZWTk",
+        authDomain: "melhoresdevs2024.firebaseapp.com",
+        projectId: "melhoresdevs2024",
+        storageBucket: "melhoresdevs2024.appspot.com",
+        messagingSenderId: "980919204200",
+        appId: "1:980919204200:web:658494f5de9d2696a93edd",
+      };
+
+      const app = initializeApp(firebaseConfig);
+
+      const storage = getStorage(app);
+
+      const formulario = document.getElementById("formulario");
+      const arquivo = document.getElementById("arquivo");
+      const corpoDaTabela = document.getElementById("corpoDaTabela");
+
+      async function listarImagens() {
+        const listaReferencia = ref(storage, "acessorios/");
+        const resposta = await listAll(listaReferencia);
+        corpoDaTabela.innerHTML = "";
+        resposta.items.forEach(async (itemReferencia) => {
+          const url = await getDownloadURL(itemReferencia);
+          const tr = document.createElement("tr");
+          const tdImagem = document.createElement("td");
+          const img = document.createElement("img");
+          img.src = url;
+          img.style.width = "100px";
+          tdImagem.appendChild(img);
+          const tdAcoes = document.createElement("td");
+          const botaoExcluir = document.createElement("button");
+          botaoExcluir.textContent = "Excluir";
+          botaoExcluir.onclick = () => excluirImagem(itemReferencia);
+          tdAcoes.appendChild(botaoExcluir);
+          tr.appendChild(tdImagem);
+          tr.appendChild(tdAcoes);
+          corpoDaTabela.appendChild(tr);
+        });
+      }
+      async function excluirImagem(itemReferencia) {
+        await deleteObject(itemReferencia);
+        alert("Imagem excluída com sucesso!");
+        listarImagens();
+      }
+      listarImagens();
+      formulario.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        if (arquivo.files[0]) {
+          const storageReferencia = ref(
+            storage,
+            `acessorios/${arquivo.files[0].name}`
+          );
+          await uploadBytes(storageReferencia, arquivo.files[0]);
+          alert("Upload realizado com sucesso!");
+          listarImagens();
+        }
+      });
+    </script>
+  </body>
+</html>

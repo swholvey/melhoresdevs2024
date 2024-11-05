@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="galeria"></div>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+      import {
+        getStorage,
+        ref,
+        listAll,
+        getDownloadURL,
+      } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-storage.js";
+      const firebaseConfig = {
+        apiKey: "AIzaSyD3DJ2tmoTSI9jqk3w_sxEkd8PyIr0ZWTk",
+        authDomain: "melhoresdevs2024.firebaseapp.com",
+        projectId: "melhoresdevs2024",
+        storageBucket: "melhoresdevs2024.appspot.com",
+        messagingSenderId: "980919204200",
+        appId: "1:980919204200:web:658494f5de9d2696a93edd",
+      };
+      const app = initializeApp(firebaseConfig);
+      const storage = getStorage(app);
+      const storageRef = ref(storage, "acessorios");
+      listAll(storageRef)
+        .then((res) => {
+          //console.log(res.items);
+          let galeria = document.getElementById("galeria");
+          res.items.forEach((itemRef) => {
+            getDownloadURL(itemRef).then((url) => {
+              //console.log(url);
+              let img = document.createElement("img");
+              img.src = url;
+              img.style.width = '200px'
+              galeria.appendChild(img);
+            });
+          });
+        })
+        .catch((error) => {
+          console.error("Erro ao listar os itens do storage:", error);
+        });
+    </script>
+  </body>
+</html>

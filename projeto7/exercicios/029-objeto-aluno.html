@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let aluno = {
+            nome: 'John',
+            notas: [1, 2, 3, 4],
+            media: function () {
+                let soma = 0;
+                for (let i = 0; i < this.notas.length; i++) {
+                    soma += this.notas[i];
+                }
+                return soma / this.notas.length;
+            }
+        }
+        console.log(aluno.media());
+    </script>
+</body>
+
+</html>

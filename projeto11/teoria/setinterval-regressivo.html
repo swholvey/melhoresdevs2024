@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="div1">Carregando...</div>
+    <button id="botao-download" style="display: none">Download</button>
+    <script>
+      let div1 = document.getElementById("div1");
+      let numero = 10;
+      let intervalo;
+      function atualizaTexto() {
+        div1.textContent = numero;
+        if (numero == 0) {
+          document.getElementById("botao-download").style.display =
+            "inline-block";
+          window.clearInterval(intervalo);
+        }
+        numero--;
+      }
+      intervalo = window.setInterval(atualizaTexto, 1000);
+    </script>
+  </body>
+</html>
