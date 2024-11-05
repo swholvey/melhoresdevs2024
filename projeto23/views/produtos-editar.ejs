@@ -18,8 +18,8 @@
         <input class="form-control" type="text" name="valor" value="<%= produto.valor %>" />
         <label class="form-label mt-2" for="visivel"> Visível </label>
         <select class="form-control" name="visivel">
-          <option value="1">Sim</option>
-          <option value="0">Não</option>
+          <option value="1" <%= produto.visivel == '1' ? 'selected' : null %>>Sim</option>
+          <option value="0" <%= produto.visivel == '0' ? 'selected' : null %>>Não</option>
         </select>
         <button type="submit" class="mt-2 btn-primary">Salvar</button>
       </form>
