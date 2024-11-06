@@ -9,17 +9,16 @@
   <body>
     <%- include('partials/menu') -%>
     <main>
-      Produtos / Editar
+      Produtos / Novo
       <form action="/produtos/salvar" method="post">
-        <input type="hidden" name="id" value="<%= produto.id %>" />
         <label class="form-label mt-2" for="nome">Nome</label>
-        <input class="form-control" type="text" name="nome" value="<%= produto.nome %>" />
+        <input class="form-control" type="text" name="nome" required />
         <label class="form-label mt-2" for="valor"> Valor </label>
-        <input class="form-control" type="text" name="valor" value="<%= produto.valor %>" />
+        <input class="form-control" type="text" name="valor" required />
         <label class="form-label mt-2" for="visivel"> Visível </label>
-        <select class="form-control" name="visivel">
-          <option value="1" <%= produto.visivel == '1' ? 'selected' : null %>>Sim</option>
-          <option value="0" <%= produto.visivel == '0' ? 'selected' : null %>>Não</option>
+        <select class="form-control" name="visivel" required>
+          <option value="1">Sim</option>
+          <option value="0">Não</option>
         </select>
         <button type="submit" class="mt-2 btn-primary">Salvar</button>
       </form>

@@ -23,6 +23,8 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use(express.urlencoded({ extended: true }));
+
 app.get("/", (requisicao, resposta) => {
   resposta.render("index");
 });
@@ -37,8 +39,8 @@ app.get("/produtos", (requisicao, resposta) => {
 
 app.get("/produtos/excluir", (requisicao, resposta) => {
   let id = requisicao.query.id;
-  let sql = `DELETE FROM produtos WHERE id = '${id}'`;
-  db.query(sql, (erro) => {
+  let sql = `DELETE FROM produtos WHERE id = ?`;
+  db.query(sql, [id], (erro) => {
     if (erro) {
       resposta.status(500).send(erro);
     }
@@ -53,6 +55,35 @@ app.get("/produtos/editar", (requisicao, resposta) => {
     let produto = dado[0];
     resposta.render("produtos-editar", { produto });
   });
+});
+
+app.post("/produtos/salvar", (requisicao, resposta) => {
+  let nome = requisicao.body.nome;
+  let valor = requisicao.body.valor;
+  let visivel = requisicao.body.visivel;
+  let sql;
+  if (requisicao.body.id) {
+    let id = requisicao.body.id;
+    sql = `UPDATE produtos SET nome = ?, valor = ?, visivel = ? WHERE id = ?`;
+    db.query(sql, [nome, valor, visivel, id], (erro) => {
+      if (erro) {
+        resposta.status(500).send(erro);
+      }
+      resposta.redirect("/produtos");
+    });
+  } else {
+    sql = `INSERT INTO produtos (nome, valor, visivel) VALUES (?,?,?)`;
+    db.query(sql, [nome, valor, visivel], (erro) => {
+      if (erro) {
+        resposta.status(500).send(erro);
+      }
+      resposta.redirect("/produtos");
+    });
+  }
+});
+
+app.get("/produtos/novo", (requisicao, resposta) => {
+  resposta.render("produtos-novo");
 });
 
 app.use((requisicao, resposta) => {
