@@ -29,7 +29,7 @@
       >
         <label class="form-label" for="nome"> Categoria </label>
 
-        <select class="form-control" name="categoria_id">
+        <select class="form-control bg-light" name="categoria_id">
           <option value=""></option>
           <% for (let categoria of categorias) { %>
           <option value="<%= categoria.id %>"><%= categoria.nome %></option>
@@ -37,11 +37,11 @@
         </select>
 
         <label class="form-label mt-3" for="nome"> Nome </label>
-        <input class="form-control" type="text" name="nome" value="" required />
+        <input class="form-control bg-light" type="text" name="nome" value="" required />
 
         <label class="form-label mt-3" for="valor"> Valor </label>
         <input
-          class="form-control"
+          class="form-control bg-light"
           type="text"
           name="valor"
           value=""
@@ -49,13 +49,13 @@
         />
 
         <label class="form-label mt-3" for="visivel"> Visível </label>
-        <select class="form-control" name="visivel">
+        <select class="form-control bg-light" name="visivel">
           <option value="1">Sim</option>
           <option value="0">>Não</option>
         </select>
 
         <label class="form-label mt-3" for="imagem"> Imagem </label>
-        <input class="form-control" type="file" name="imagem" />
+        <input class="form-control bg-light" type="file" name="imagem" />
 
         <button type="submit" class="btn btn-primary mt-4">Salvar</button>
       </form>

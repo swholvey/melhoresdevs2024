@@ -25,10 +25,10 @@
 
       <form class="card p-4" action="/produtos/update" method="post" enctype="multipart/form-data">
 
-        <input class="form-control" type="hidden" name="id" value="<%= produto.id %>" required />
+        <input class="form-control bg-light" type="hidden" name="id" value="<%= produto.id %>" required />
 
         <label class="form-label" for="categoria"> Categoria </label>
-        <select class="form-control" name="categoria_id">
+        <select class="form-control bg-light" name="categoria_id">
           <option value=""></option>
           <% for (let categoria of categorias) { %>
           <option value="<%= categoria.id %>" <%= (categoria.id == produto.categoria_id ? 'selected' : null) %>>
@@ -38,13 +38,13 @@
         </select>
         
         <label class="form-label mt-3" for="nome"> Nome </label>
-        <input class="form-control" type="text" name="nome" value="<%= produto.nome %>" required />
+        <input class="form-control bg-light" type="text" name="nome" value="<%= produto.nome %>" required />
         
         <label class="form-label mt-3" for="valor"> Valor </label>
-        <input class="form-control" type="text" name="valor" value="<%= produto.valor %>" required />
+        <input class="form-control bg-light" type="text" name="valor" value="<%= produto.valor %>" required />
         
         <label class="form-label mt-3" for="visivel"> Visível </label>
-        <select class="form-control" name="visivel" required>
+        <select class="form-control bg-light" name="visivel" required>
           <option value="1" <%= (produto.visivel == '1' ? 'selected' : null) %>>Sim</option>
           <option value="0" <%= (produto.visivel == '0' ? 'selected' : null) %>>Não</option>
         </select>
@@ -57,7 +57,7 @@
           </a>
         <% } %>
 
-        <input class="form-control mt-4" type="file" name="imagem" />
+        <input class="form-control bg-light mt-4" type="file" name="imagem" />
         
         <button type="submit" class="btn btn-primary mt-4">Salvar</button>
 

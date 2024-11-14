@@ -10,7 +10,7 @@
     <%- include('partials/menu') -%>
     <main>
       Produtos / Editar
-      <form action="/produtos/salvar" method="post">
+      <form action="/produtos/update" method="post">
         <input type="hidden" name="id" value="<%= produto.id %>" />
         <label class="form-label mt-2" for="nome">Nome</label>
         <input class="form-control" type="text" name="nome" value="<%= produto.nome %>" />
