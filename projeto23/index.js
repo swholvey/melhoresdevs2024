@@ -81,8 +81,15 @@ app.get("/", (requisicao, resposta) => {
 });
 
 app.get("/produtos", verificarLogin, (requisicao, resposta) => {
-  let sql = "SELECT * FROM produtos";
+  let sql = `
+  SELECT p.*, c.nome categoria_nome 
+  FROM produtos p, categorias c 
+  WHERE p.categoria_id = c.id
+  `;
   db.query(sql, (erro, dados) => {
+    if (erro) {
+      resposta.status(500).send(erro);
+    }
     let produtos = dados;
     resposta.render("produtos", { produtos });
   });
@@ -101,23 +108,31 @@ app.get("/produtos/excluir", verificarLogin, (requisicao, resposta) => {
 
 app.get("/produtos/editar", verificarLogin, (requisicao, resposta) => {
   let id = requisicao.query.id;
-  let sql = `SELECT * FROM produtos WHERE id = '${id}'`;
-  db.query(sql, (erro, dado) => {
-    let produto = dado[0];
-    resposta.render("produtos-editar", { produto });
+  let sqlProdutos = `SELECT * FROM produtos WHERE id = '${id}'`;
+  db.query(sqlProdutos, (erro, produto) => {
+    if (erro) {
+      resposta.status(500).send(erro);
+    }
+    let sqlCategorias = "SELECT * FROM categorias ORDER BY nome";
+    db.query(sqlCategorias, (erro, categorias) => {
+      if (erro) {
+        resposta.status(500).send(erro);
+      }
+      resposta.render("produtos-editar", { produto: produto[0], categorias });
+    });
   });
 });
 
 app.post("/produtos/insert", verificarLogin, (requisicao, resposta) => {
-  let { nome, valor, visivel } = requisicao.body;
-  if (nome == "" || valor == "" || visivel == "") {
+  let { categoria_id, nome, valor, visivel } = requisicao.body;
+  if (categoria_id == "" || nome == "" || valor == "" || visivel == "") {
     return resposta
       .status(400)
       .send("É obrigatório o preenchimento de todos os campos.");
   }
   let sql;
-  sql = `INSERT INTO produtos (nome, valor, visivel) VALUES (?,?,?)`;
-  db.query(sql, [nome, valor, visivel], (erro) => {
+  sql = `INSERT INTO produtos (categoria_id, nome, valor, visivel) VALUES (?,?,?,?)`;
+  db.query(sql, [categoria_id, nome, valor, visivel], (erro) => {
     if (erro) {
       resposta.status(500).send(erro);
     }
@@ -126,15 +141,15 @@ app.post("/produtos/insert", verificarLogin, (requisicao, resposta) => {
 });
 
 app.post("/produtos/update", verificarLogin, (requisicao, resposta) => {
-  let { id, nome, valor, visivel } = requisicao.body;
-  if (id == "" || nome == "" || valor == "" || visivel == "") {
+  let { id, categoria_id, nome, valor, visivel } = requisicao.body;
+  if (id == "" || categoria_id == "" || nome == "" || valor == "" || visivel == "") {
     return resposta
       .status(400)
       .send("É obrigatório o preenchimento de todos os campos.");
   }
   let sql;
-  sql = `UPDATE produtos SET nome = ?, valor = ?, visivel = ? WHERE id = ?`;
-  db.query(sql, [nome, valor, visivel, id], (erro) => {
+  sql = `UPDATE produtos SET categoria_id = ?, nome = ?, valor = ?, visivel = ? WHERE id = ?`;
+  db.query(sql, [categoria_id, nome, valor, visivel, id], (erro) => {
     if (erro) {
       resposta.status(500).send(erro);
     }
@@ -143,7 +158,13 @@ app.post("/produtos/update", verificarLogin, (requisicao, resposta) => {
 });
 
 app.get("/produtos/novo", verificarLogin, (requisicao, resposta) => {
-  resposta.render("produtos-novo");
+  let sql = "SELECT * FROM categorias ORDER BY nome";
+  db.query(sql, (erro, categorias) => {
+    if (erro) {
+      resposta.status(500).send(erro);
+    }
+    resposta.render("produtos-novo", { categorias });
+  });
 });
 
 app.use((requisicao, resposta) => {
