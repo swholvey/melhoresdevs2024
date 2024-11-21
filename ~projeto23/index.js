@@ -8,12 +8,14 @@ const md5 = require("md5");
 
 const app = express();
 
-app.use(session({
-  secret: "chave-secreta",
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false }
-}));
+app.use(
+  session({
+    secret: "chave-secreta",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false },
+  })
+);
 
 function verificarLogin(requisicao, resposta, next) {
   if (requisicao.session.usuario) {
@@ -48,7 +50,6 @@ db.connect((erro) => {
   console.log("Conectou no MySQL!");
 });
 
-
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
@@ -57,7 +58,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 
 const armazenamento = multer.diskStorage({
-
   destination: function (requisicao, arquivo, cb) {
     cb(null, path.join(__dirname, "public/uploads"));
   },
@@ -66,7 +66,6 @@ const armazenamento = multer.diskStorage({
     const nomeSanitizado = sanitizeFileName(arquivo.originalname);
     cb(null, sufixoUnico + "-" + nomeSanitizado);
   },
-
 });
 
 const upload = multer({ storage: armazenamento });
@@ -76,7 +75,6 @@ app.get("/login", (req, res) => {
 });
 
 app.post("/login", (requisicao, resposta) => {
-
   const { email, senha } = requisicao.body;
   const senhaCriptografada = md5(senha);
 
@@ -92,7 +90,6 @@ app.post("/login", (requisicao, resposta) => {
       resposta.render("login", { erro: "Usuário ou senha incorretos" });
     }
   });
-
 });
 
 app.get("/logout", (requisicao, resposta) => {
@@ -109,13 +106,17 @@ app.get("/", (requisicao, resposta) => {
 });
 
 app.get("/produtos", verificarLogin, (requisicao, resposta) => {
-
   let where = "1";
-  
+
   let limit = parseInt(requisicao.query.limit) || 5;
   let offset = parseInt(requisicao.query.offset) || 0;
 
-  if (requisicao.query.search && requisicao.query.column && requisicao.query.operator && requisicao.query.value) {
+  if (
+    requisicao.query.search &&
+    requisicao.query.column &&
+    requisicao.query.operator &&
+    requisicao.query.value
+  ) {
     let column = mysql.escapeId(requisicao.query.column);
     let operator = requisicao.query.operator;
     let value = mysql.escape(requisicao.query.value);
@@ -123,7 +124,9 @@ app.get("/produtos", verificarLogin, (requisicao, resposta) => {
   }
 
   let order = requisicao.query.order === "desc" ? "DESC" : "ASC";
-  let orderColumn = requisicao.query.orderColumn ? mysql.escapeId(requisicao.query.orderColumn) : "p.id";
+  let orderColumn = requisicao.query.orderColumn
+    ? mysql.escapeId(requisicao.query.orderColumn)
+    : "p.id";
 
   let sql = `
     SELECT p.*, c.nome AS categoria_nome 
@@ -137,54 +140,56 @@ app.get("/produtos", verificarLogin, (requisicao, resposta) => {
   let sqlTotal = `SELECT COUNT(*) AS total FROM produtos p JOIN categorias c ON p.categoria_id = c.id WHERE ${where}`;
 
   db.query(sqlTotal, (erro, resultadoTotal) => {
-
     if (erro) {
       return resposta.status(500).send(erro);
     }
 
     const totalRegistros = resultadoTotal[0].total;
-    
+
     db.query(sql, (erro, dados) => {
       if (erro) {
         return resposta.status(500).send(erro);
       }
 
-      resposta.render("produtos", { requisicao, produtos: dados, totalRegistros, limit, offset });
+      resposta.render("produtos", {
+        requisicao,
+        produtos: dados,
+        totalRegistros,
+        limit,
+        offset,
+      });
     });
   });
 });
 
 app.get("/produtos/novo", verificarLogin, (requisicao, resposta) => {
-
   let sqlCategorias = `SELECT * FROM categorias ORDER BY nome`;
 
-  db.query(sqlCategorias,(erro,dados) => {
+  db.query(sqlCategorias, (erro, dados) => {
     let categorias = dados;
     resposta.render("produtos-novo", { categorias });
   });
-
 });
 
 app.get("/produtos/editar", verificarLogin, (requisicao, resposta) => {
-
   let id = requisicao.query.id;
 
   let sqlProduto = `SELECT * FROM produtos WHERE id = ?`;
-  
+
   let sqlCategorias = `SELECT * FROM categorias`;
 
   db.query(sqlProduto, [id], (erro, resultadoProduto) => {
     if (erro) {
       return resposta.status(500).send(erro);
     }
-    
+
     let produto = resultadoProduto[0];
 
     db.query(sqlCategorias, (erro, resultadoCategorias) => {
       if (erro) {
         return resposta.status(500).send(erro);
       }
-      
+
       let categorias = resultadoCategorias;
 
       resposta.render("produtos-editar", { produto, categorias });
@@ -192,70 +197,28 @@ app.get("/produtos/editar", verificarLogin, (requisicao, resposta) => {
   });
 });
 
-app.post("/produtos/insert", verificarLogin,  upload.single("imagem"), (requisicao, resposta) => {
-  
-  let { categoria_id, nome, valor, visivel } = requisicao.body;
+app.post(
+  "/produtos/insert",
+  verificarLogin,
+  upload.single("imagem"),
+  (requisicao, resposta) => {
+    let { categoria_id, nome, valor, visivel } = requisicao.body;
 
-  let imagemNova = requisicao.file ? sanitizeFileName(requisicao.file.filename) : null;
-  
-  if (nome == "" || valor == "" || visivel == "") {
-    return resposta.status(400).send("Todos os campos devem ser preenchidos.");
-  }
-  
-  let campos = [categoria_id, nome, valor, visivel, imagemNova];
-  
-  let sql;
+    let imagemNova = requisicao.file
+      ? sanitizeFileName(requisicao.file.filename)
+      : null;
 
-  sql = `INSERT INTO produtos (categoria_id, nome, valor, visivel, imagem) VALUES (?, ?, ?, ?, ?)`;
-
-  db.query(sql, campos, (erro) => {
-    if (erro) {
-      return resposta.status(500).send(erro);
+    if (nome == "" || valor == "" || visivel == "") {
+      return resposta
+        .status(400)
+        .send("Todos os campos devem ser preenchidos.");
     }
-    resposta.redirect("/produtos");
-  });
 
-});
+    let campos = [categoria_id, nome, valor, visivel, imagemNova];
 
-app.post("/produtos/update", verificarLogin, upload.single("imagem"), (requisicao, resposta) => {
-  
-  let { categoria_id, id, nome, valor, visivel } = requisicao.body;
-  
-  let imagemNova = requisicao.file ? sanitizeFileName(requisicao.file.filename) : null;
+    let sql;
 
-  if (nome == "" || valor == "" || visivel == "") {
-
-    return resposta.status(400).send("Todos os campos devem ser preenchidos.");
-
-  }
-
-  let sql;
-
-  let buscaImagemSQL = `SELECT imagem FROM produtos WHERE id = ${id}`;
-  
-  db.query(buscaImagemSQL, (erro, resultados) => {
-
-    if (erro) {
-      return resposta.status(500).send(erro);
-    }
-    
-    let imagemAntiga = resultados[0].imagem;
-
-    if (imagemNova && imagemAntiga) {
-
-      const caminhoImagemAntiga = path.join(__dirname, "public/uploads", imagemAntiga);
-      
-      fs.unlink(caminhoImagemAntiga, (erro) => {
-        if (erro) {
-          console.log("Erro ao excluir a imagem antiga:", erro);
-        }
-      });
-
-    }
-    
-    let campos = [nome, valor, visivel, imagemNova, categoria_id, id];
-    
-    sql = `UPDATE produtos SET nome = ?, valor = ?, visivel = ?, imagem = ?, categoria_id = ? WHERE id = ?`;
+    sql = `INSERT INTO produtos (categoria_id, nome, valor, visivel, imagem) VALUES (?, ?, ?, ?, ?)`;
 
     db.query(sql, campos, (erro) => {
       if (erro) {
@@ -263,9 +226,64 @@ app.post("/produtos/update", verificarLogin, upload.single("imagem"), (requisica
       }
       resposta.redirect("/produtos");
     });
-  });
+  }
+);
 
-});
+app.post(
+  "/produtos/update",
+  verificarLogin,
+  upload.single("imagem"),
+  (requisicao, resposta) => {
+    let { categoria_id, id, nome, valor, visivel } = requisicao.body;
+
+    let imagemNova = requisicao.file
+      ? sanitizeFileName(requisicao.file.filename)
+      : null;
+
+    if (nome == "" || valor == "" || visivel == "") {
+      return resposta
+        .status(400)
+        .send("Todos os campos devem ser preenchidos.");
+    }
+
+    let sql;
+
+    let buscaImagemSQL = `SELECT imagem FROM produtos WHERE id = ${id}`;
+
+    db.query(buscaImagemSQL, (erro, resultados) => {
+      if (erro) {
+        return resposta.status(500).send(erro);
+      }
+
+      let imagemAntiga = resultados[0].imagem;
+
+      if (imagemNova && imagemAntiga) {
+        const caminhoImagemAntiga = path.join(
+          __dirname,
+          "public/uploads",
+          imagemAntiga
+        );
+
+        fs.unlink(caminhoImagemAntiga, (erro) => {
+          if (erro) {
+            console.log("Erro ao excluir a imagem antiga:", erro);
+          }
+        });
+      }
+
+      let campos = [nome, valor, visivel, imagemNova, categoria_id, id];
+
+      sql = `UPDATE produtos SET nome = ?, valor = ?, visivel = ?, imagem = ?, categoria_id = ? WHERE id = ?`;
+
+      db.query(sql, campos, (erro) => {
+        if (erro) {
+          return resposta.status(500).send(erro);
+        }
+        resposta.redirect("/produtos");
+      });
+    });
+  }
+);
 
 app.get("/produtos/excluir", verificarLogin, (requisicao, resposta) => {
   let id = requisicao.query.id;

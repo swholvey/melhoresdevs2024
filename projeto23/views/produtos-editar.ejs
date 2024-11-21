@@ -15,7 +15,7 @@
     <%- include('partials/menu') -%>
     <main class="container mt-3">
       Produtos / Editar
-      <form class="card mt-3 p-3" action="/produtos/update" method="post">
+      <form class="card mt-3 p-3" action="/produtos/update" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<%= produto.id %>" />
         <label class="form-label" for="categoria_id">Categoria</label>
         <select class="form-control" name="categoria_id">
@@ -33,6 +33,13 @@
           <option value="1" <%= produto.visivel == '1' ? 'selected' : null %>>Sim</option>
           <option value="0" <%= produto.visivel == '0' ? 'selected' : null %>>Não</option>
         </select>
+        <label for="imagem" class="form-label mt-2">Imagem</label>
+        <% if (produto.imagem) { %>
+          <a href="/uploads/<%= produto.imagem %>" class="card p-2" target="_blank">
+            <img src="/uploads/<%= produto.imagem %>" style="max-width: 100px;">
+          </a>
+        <% } %>
+        <input type="file" name="imagem" class="form-control bg-light mt-2">
         <button type="submit" class="mt-2 btn btn-primary">Salvar</button>
       </form>
     </main>
